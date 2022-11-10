@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mahasiswas', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('NIM', 8)->unique();
-            $table->string('nama', 50);
             $table->timestamps();
-            
+            $table->string('NIM', 8)->nullable();
+            $table->float('water_usage')->nullable();
+            $table->float('pH')->nullable();
+            $table->float('TDS')->nullable();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswas');
+        Schema::dropIfExists('statuses');
     }
 };

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
+        // Duta Janji
         Mahasiswa::create([
             'NIM' => '13321029',
             'nama' => 'Nafi Mulyo Kusumo',
