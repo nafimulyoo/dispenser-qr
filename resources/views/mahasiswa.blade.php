@@ -10,7 +10,7 @@
     <tr>
         <td>{{ $mhs->id }}</td>
         <td>{{ $mhs->NIM }}</td>
-        <td>{{ $mhs->nama }}</td>
+        <td>{{ $mhs->name }}</td>
     </tr>
     @endforeach
 </table>

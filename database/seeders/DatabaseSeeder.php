@@ -19,19 +19,28 @@ class DatabaseSeeder extends Seeder
         // Duta Janji
         Mahasiswa::create([
             'NIM' => '13321029',
-            'nama' => 'Nafi Mulyo Kusumo',
+            'name' => 'Nafi Mulyo Kusumo',
         ]);
         Mahasiswa::create([
             'NIM' => '13321040',
-            'nama' => 'Syarafina Ghassani Az Zahro',
+            'name' => 'Syarafina Ghassani Az Zahro',
         ]);
         Mahasiswa::create([
             'NIM' => '13321045',
-            'nama' => 'Mohammad Ilham Hazetra',
+            'name' => 'Mohammad Ilham Hazetra',
         ]);
         Mahasiswa::create([
             'NIM' => '13321021',
-            'nama' => 'Adelia Putri',
+            'name' => 'Adelia Putri',
         ]);
+        Mahasiswa::create([
+            'NIM' => '13321075',
+            'name' => 'Carlios Eryan',
+        ]);
+        Mahasiswa::create([
+            'NIM' => '13321005',
+            'name' => 'Clara Caroline',
+        ]);
+        
     }
 }

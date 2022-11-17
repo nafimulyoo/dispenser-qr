@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/drink/{NIM}', [DispenserController::class, 'drink']);
 Route::post('/dispenser', [DispenserController::class, 'store']);

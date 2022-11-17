@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\Status;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
 
 class DispenserController extends Controller
@@ -17,6 +18,23 @@ class DispenserController extends Controller
         $status = Status::latest()->first();
         return $status;
     }
+
+    public function drink($NIM)
+    {
+        if (Mahasiswa::where('NIM', $NIM)->exists()) {
+            return response()->json([
+                "drink" => true,
+                "message" => "Success",
+                "name" => Mahasiswa::where('NIM', $NIM)->first()->name,
+            ], 201);}
+        else {
+            return response()->json([
+                "drink" => false,
+                "message" => "Invalid NIM",
+                "name" => null,
+            ], 404);
+        }
+    }
     
     /**
      * Store a newly created resource in storage.
@@ -26,46 +44,15 @@ class DispenserController extends Controller
      */
     public function store(Request $request)
     {
-        // if NIM is not in request, return error
-        if (!$request->has('NIM')) {
-
-            Status::create([
-                'pH' => $request->pH,
-                'TDS' => $request->TDS,
-            ]);
-
-            return response()->json([
-                'dispense' => 'rejected',
-                'message' => 'NIM is required'
-            ], 400);
-        }
-
-        else {
-            if (Mahasiswa::where('NIM', $request->NIM)->exists()) {
-                Status::create([
-                    'NIM' => $request->NIM,
-                    'water_usage' => $request->water_usage,
-                    'pH' => $request->pH,
-                    'TDS' => $request->TDS,
-                ]);
-                return response()->json([
-                    "dispense" => "accepted",
-                    "message" => "status created"
-                ], 201);}
-            else {
-
-                Status::create([
-                    'pH' => $request->pH,
-                    'TDS' => $request->TDS,
-                ]); 
-                
-                return response()->json([
-                    "dispense" => "rejected",
-                    "message" => "NIM not found"
-                ], 404);
-            }
-        }
-        
+        Status::create([
+            'NIM' => $request->NIM,
+            'water_usage' => $request->water_usage,
+        ]);
+        return response()->json([
+            "message" => "Status record created",
+            "NIM" => $request->NIM,
+            "water_usage" => $request->water_usage,
+        ], 201);   
     }
 
     /**

@@ -11,15 +11,12 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('NIM', 8)->nullable();
             $table->float('water_usage')->nullable();
-            $table->float('pH')->nullable();
-            $table->float('TDS')->nullable();
         });
     }
 
