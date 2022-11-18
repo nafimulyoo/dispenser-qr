@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Mahasiswa;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -33,12 +34,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'NIM' => ['required', 'string', 'max:255', 'unique:users'],
             'nickname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        $mahasiswa = Mahasiswa::where('NIM', $request->NIM)->first();
+        if ($mahasiswa == null) {
+            return back()->withErrors(['NIM' => 'NIM tidak terdaftar']);
+        }
 
         $user = User::create([
             'NIM' => $request->NIM,
