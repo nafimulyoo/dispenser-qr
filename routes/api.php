@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/drink', [DispenserController::class, 'index']);
 Route::get('/drink/{qrcode}', [DispenserController::class, 'drink']);
-Route::post('/dispenser', [DispenserController::class, 'store']);
+Route::post('/drink', [DispenserController::class, 'store']);

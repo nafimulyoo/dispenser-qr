@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Mahasiswa;
+use App\Models\Dispense;
 
 class ProfileController extends Controller
 {
@@ -18,19 +19,18 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
-        $mahasiswa = Mahasiswa::where('NIM', Auth::user()->NIM)->first();
         return view('profile.edit', [
             'user' => $request->user(),
-            'mahasiswa' => $mahasiswa
         ]);
     }
 
     public function dashboard(Request $request)
     {
-        $water_usage = Mahasiswa::where('NIM', Auth::user()->NIM)->first()->water_usage;
+        //total water_usage on Dispense table
+        $dispense_data = Dispense::all();
         return view('dashboard', [
             'user' => $request->user(),
-            'water_usage' => $water_usage,
+            'dispense_data' => $dispense_data,
         ]);
     }
 
@@ -49,7 +49,6 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-        $mahasiswa = Mahasiswa::where('NIM', Auth::user()->NIM)->first();
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 

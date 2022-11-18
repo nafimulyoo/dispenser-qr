@@ -18,7 +18,11 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    } else {
+        return view('auth.login');
+    }
 });
 
 Route::middleware('auth')->group(function () {
