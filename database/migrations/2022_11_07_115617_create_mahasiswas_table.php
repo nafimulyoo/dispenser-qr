@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('NIM', 8)->unique();
             $table->string('name', 50);
             $table->timestamps();
-            
         });
     }
 

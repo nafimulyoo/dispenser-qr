@@ -11,12 +11,13 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up(){
-        Schema::create('statuses', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('dispenses', function (Blueprint $table) {
             $table->id();
+            $table->string('NIM', 8);
+            $table->float('water_usage');
             $table->timestamps();
-            $table->string('NIM', 8)->nullable();
-            $table->float('water_usage')->nullable();
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statuses');
+        Schema::dropIfExists('dispenses');
     }
 };

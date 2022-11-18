@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Mahasiswa;
-use App\Models\Status;
+use App\Models\User;
+use App\Models\Dispense;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
 
@@ -15,22 +15,23 @@ class DispenserController extends Controller
      */
     public function index()
     {
-        $status = Status::latest()->first();
+        $status = Dispense::latest()->first();
         return $status;
     }
 
-    public function drink($NIM)
+    public function drink($qrcode)
     {
-        if (Mahasiswa::where('NIM', $NIM)->exists()) {
+        if (User::where('qrcode', $qrcode)->exists()) {
             return response()->json([
                 "drink" => true,
                 "message" => "Success",
-                "name" => Mahasiswa::where('NIM', $NIM)->first()->name,
+                // nickname
+                "nickname" => User::where('qrcode', $qrcode)->first()->nickname,
             ], 201);}
         else {
             return response()->json([
                 "drink" => false,
-                "message" => "Invalid NIM",
+                "message" => "Invalid QR Code",
                 "name" => null,
             ], 404);
         }
@@ -44,13 +45,15 @@ class DispenserController extends Controller
      */
     public function store(Request $request)
     {
-        Status::create([
-            'NIM' => $request->NIM,
+        // pick first 8 digit of qrcode
+        $NIM = substr($request->qrcode, 0, 8);
+        Dispense::create([
+            'NIM' => $NIM,
             'water_usage' => $request->water_usage,
         ]);
         return response()->json([
             "message" => "Status record created",
-            "NIM" => $request->NIM,
+            "NIM" => $NIM,
             "water_usage" => $request->water_usage,
         ], 201);   
     }

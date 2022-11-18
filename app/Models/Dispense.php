@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Dispense extends Model
 {
     use HasFactory;
-    protected $table = 'statuses';
-    protected $fillable =
-    [
+
+    protected $fillable = [
         'NIM',
         'water_usage',
-        'pH',
-        'TDS',
     ];
-    protected $primaryKey = 'timestamp';
 }

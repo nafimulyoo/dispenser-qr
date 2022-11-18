@@ -11,10 +11,11 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         
         <div>
+            <x-input-label for="fullname" :value="__('Fullname')" />
+            <p> {{ $user->fullname }} </p>
             <x-input-label for="NIM" :value="__('NIM')" />
             <p> {{ $user->NIM }} </p>
-
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data={{$user->NIM}}" alt="Profile Photo" class="rounded-full h-20 w-20 object-cover">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{$user->qrcode}}" alt="Profile Photo" class="rounded-full h-20 w-20 object-cover">
         </div>
 
         @csrf

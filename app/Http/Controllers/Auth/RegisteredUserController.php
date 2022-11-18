@@ -49,9 +49,11 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'NIM' => $request->NIM,
+            'fullname' => $mahasiswa->name,
             'nickname' => $request->nickname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'qrcode' => $request->NIM . rand(10000, 99999),
         ]);
 
         event(new Registered($user));
