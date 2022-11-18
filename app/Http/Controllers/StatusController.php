@@ -12,5 +12,4 @@ class StatusController extends Controller
         $status = Status::all();
         return view('status', ['status' => $status]);
     }
-
 }
