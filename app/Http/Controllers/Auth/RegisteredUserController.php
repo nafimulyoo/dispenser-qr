@@ -54,6 +54,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $hash = Hash::make($request->password);
+        $mahasiswa->qrcode = $request->NIM . substr($hash, 0, 5);
+        $mahasiswa->save();
+
         event(new Registered($user));
 
         Auth::login($user);

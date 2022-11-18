@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('NIM', 8)->unique();
             $table->string('name', 50);
+            $table->string('qrcode', 50)->nullable();
+            $table->float('water_usage')->default(0);
             $table->timestamps();
-            
         });
     }
 

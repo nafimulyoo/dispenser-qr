@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
+use App\Models\User;
 use App\Models\Status;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Http\Request;
@@ -19,18 +20,19 @@ class DispenserController extends Controller
         return $status;
     }
 
-    public function drink($NIM)
+    public function drink($qrcode)
     {
-        if (Mahasiswa::where('NIM', $NIM)->exists()) {
+        if (Mahasiswa::where('qrcode', $qrcode)->exists()) {
             return response()->json([
                 "drink" => true,
                 "message" => "Success",
-                "name" => Mahasiswa::where('NIM', $NIM)->first()->name,
+                // nickname
+                "nickname" => User::where('NIM', Mahasiswa::where('qrcode', $qrcode)->first()->NIM)->first()->nickname,
             ], 201);}
         else {
             return response()->json([
                 "drink" => false,
-                "message" => "Invalid NIM",
+                "message" => "Invalid QR Code",
                 "name" => null,
             ], 404);
         }
