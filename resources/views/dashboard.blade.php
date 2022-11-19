@@ -14,7 +14,7 @@
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900" >
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{$user->qrcode}}" alt="Profile Photo" class="rounded-full h-20 w-20 object-cover">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{$user->qrcode}}" alt="Profile Photo">
                 </div>
                 <div class="p-6 text-gray-900" >
                     {{-- user water usage --}}
