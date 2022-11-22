@@ -21,7 +21,7 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('dashboard');
     } else {
-        return redirect()->route('login');
+        return view('auth.login');
     }
 });
 
